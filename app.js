@@ -1,5 +1,9 @@
 'use strict';
 
+var getImgDiv = document.getElementById('imgDiv');
+
+
+// instead make this into a constructor that gets the name and src.
 var goatCruisin = `goatImagesExample/cruisin-goat.jpg`;
 var goatFloat = `goatImagesExample/float-your-goat.jpg`;
 var goatAway = `goatImagesExample/goat-away.jpg`;
@@ -11,18 +15,87 @@ var goatSweater = `goatImagesExample/sweater-goat.jpg`;
 
 
 
-/* <img src="" alt=""> */
 
 var imgArr = [goatCruisin, goatFloat, goatAway, goatHand, goatKiss, goatSassy, goatSmile, goatSweater];
 
 
+
+
 var getFirstImg = document.getElementById('firstPic');
-getFirstImg.src = imgArr[7];
+var getSecondImg = document.getElementById('secondPic');
+var getThirdImg = document.getElementById('thirdPic');
+var imgGetters = [getFirstImg,getSecondImg,getThirdImg];
+
+// write a function that gets random index from imgArr;
+
+
+// write a function that makes sure the same img isn't displayed at the same time.
+
+getFirstImg.src = imgArr[0];
+getSecondImg.src = imgArr[1];
+getThirdImg.src = imgArr[2];
+
+
+for(let get in imgGetters){
+    imgGetters[get].height = "200";
+    imgGetters[get].width = "200";
+}
+
+let firstImgLikes = 0;
+let secondImgLikes = 0;
+let thirdImgLikes = 0;
+
+//increment all current images appeared
+// test if we have clicked 25 times
+
+
+var clickHandler = function(event){
+var whatWasClicked = (event.target.id);
+console.log(whatWasClicked);
+
+if(whatWasClicked === 'firstPic'){
+firstImgLikes ++;
+console.log(firstImgLikes);    
+}
+else if(whatWasClicked === 'secondPic'){
+secondImgLikes++;
+console.log(secondImgLikes);
+}
+
+else if (whatWasClicked === 'thirdPic'){
+thirdImgLikes++;
+console.log(thirdImgLikes);    
+}
+
+//increment the total clicks here in the handler...
+    
+}
+
+getImgDiv.addEventListener("click", clickHandler);
+
+
+
+// shut listener off
+//make chart appear
+
+
+// charts 
+
+var renderChart = function(){
+//chart needs ctx
+
+//collect all data --- we need labels, dataValues, colors, 
+
+//create a data object that gets passed all our other arrays, based off the example from chartjs
+
+
+
+//call a new chart and pass in ctx and our data.
+
+}
 
 
 var ctx = document.getElementById("myCanvas").getContext("2d");
-console.log(ctx);
-
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
