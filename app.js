@@ -30,32 +30,24 @@ var getSecondImg = document.getElementById('secondPic');
 var getThirdImg = document.getElementById('thirdPic');
 var imgGetters = [getFirstImg,getSecondImg,getThirdImg];
 
-
+//ah oh, i misunderstood, this slice isn't what i was wanting, i though slicing at index 0 would grab every index, but no. refactor. 
 let GoingToBeSplicedGoatArr = goatArr.slice(0);
 
-
-var randoGoatImgGrabberFun = function(){    
 let ThreeRandosGrabbed = [];
 let HowManyDoIWantToDisplay = 3;
 
+var randoGoatImgGrabberFun = function(){    
+
 // ah oh, this hard coded version isn't going to work, the for loop is trying to splice out the same SingleGrab, I need a unique splice each time. So, turn it into a function, huh?
 let singleGrab = GoingToBeSplicedGoatArr[Math.floor(Math.random() * goatArr.length)];
-
-for(let i = 0; i < HowManyDoIWantToDisplay; i++){
+console.log(singleGrab, "single Grab");
 GoingToBeSplicedGoatArr.splice(singleGrab, 1);
 ThreeRandosGrabbed.push(singleGrab);
 }
 
-console.log(ThreeRandosGrabbed);
-
-
-console.log(GoingToBeSplicedGoatArr);
-console.log(goatArr);
-// displayerArrRandomSelection.push(randoGoatImgGrabberFun);
-}
-// now want to grab 3 randos, each unique
-
-randoGoatImgGrabberFun();
+// for (var i = 0; i < HowManyDoIWantToDisplay; i ++){
+// randoGoatImgGrabberFun();
+// }
 
 // var displayerFun = function (){
 // var displayerArrRandomSelection = [];
@@ -80,8 +72,7 @@ randoGoatImgGrabberFun();
 // getSecondImg.src = imgArr[1];
 // getThirdImg.src = imgArr[2];
 
-
-for(let get in imgGetters){
+for (let get in imgGetters){
     imgGetters[get].height = "200";
     imgGetters[get].width = "200";
 }
