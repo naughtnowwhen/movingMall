@@ -30,24 +30,44 @@ var getSecondImg = document.getElementById('secondPic');
 var getThirdImg = document.getElementById('thirdPic');
 var imgGetters = [getFirstImg,getSecondImg,getThirdImg];
 
-var rando = goatArr[Math.floor(Math.random() * goatArr.length)];
 
+console.log(goatArr);
+
+// reading online i found that splice mutates the original array,
+// the following code which slices at 0 protects the original. 
+// this is one way to do it, i could just slice, instead of splice, inside randoGoatImgGrabberFun 
+let GoingToBeSplicedGoatArr = goatArr.slice(0);
+
+//Zahra had the good idea workaround of calling two pushes, the first push to do what i'm doing, and the second to push back to the original array (with reading the correct way to push at a particular index is splice(index, 0, item))
+
+// so, two ways!
+
+
+var randoGoatImgGrabberFun = function(){    
+  let ThreeRandosGrabbed = [];
+let singleGrab = GoingToBeSplicedGoatArr[Math.floor(Math.random() * goatArr.length)];
+ThreeRandosGrabbed.push(singleGrab);
+
+GoingToBeSplicedGoatArr.splice(singleGrab, 1);
+console.log(GoingToBeSplicedGoatArr);
+console.log(goatArr);
+// displayerArrRandomSelection.push(randoGoatImgGrabberFun);
+}
 // now want to grab 3 randos, each unique
 
+randoGoatImgGrabberFun();
 
-var displayerFun = function (){
-var displayerArrRandomSelection = [];
-displayerArrRandomSelection.push(rando);
-displayerArrRandomSelection.push(rando);
-displayerArrRandomSelection.push(rando);
-// okay, realizing rando should be a function, its hard coded now, that way it's unique, and the unique checker should be part of that function. 
+// var displayerFun = function (){
+// var displayerArrRandomSelection = [];
 
-imgGetters[0].src = displayerArrRandomSelection[0].src;
-imgGetters[1].src = displayerArrRandomSelection[1].src;
-imgGetters[2].src = displayerArrRandomSelection[2].src;
+// // okay, realizing randoGoatImgGrabberFun should be a function, its hard coded now, that way it's unique, and the unique checker should be part of that function. 
 
-}
-displayerFun();
+// // imgGetters[0].src = displayerArrRandomSelection[0].src;
+// // imgGetters[1].src = displayerArrRandomSelection[1].src;
+// // imgGetters[2].src = displayerArrRandomSelection[2].src;
+
+// }
+// displayerFun();
 
 
 
