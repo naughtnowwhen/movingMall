@@ -4,21 +4,25 @@ var getImgDiv = document.getElementById('imgDiv');
 
 
 // instead make this into a constructor that gets the name and src.
-var goatCruisin = `goatImagesExample/cruisin-goat.jpg`;
-var goatFloat = `goatImagesExample/float-your-goat.jpg`;
-var goatAway = `goatImagesExample/goat-away.jpg`;
-var goatHand = `goatImagesExample/goat-out-of-hand.jpg`;
-var goatKiss = `goatImagesExample/kissing-goat.jpg`;
-var goatSassy = `goatImagesExample/sassy-goat.jpg`;
-var goatSmile = `goatImagesExample/smiling-goat.jpg`;
-var goatSweater = `goatImagesExample/sweater-goat.jpg`; 
+
+var goatArr = [];
 
 
-
-
-var imgArr = [goatCruisin, goatFloat, goatAway, goatHand, goatKiss, goatSassy, goatSmile, goatSweater];
-
-
+var GoatConstructor = function(src, name, int){
+this.src = src;
+this.name = name;
+this.int = int;
+// int for ease of tracking 
+goatArr.push(this);
+}
+new GoatConstructor(`goatImagesExample/cruisin-goat.jpg`, "goatCruisin",0);
+new GoatConstructor(`goatImagesExample/float-your-goat.jpg`, "goatFloat",1);
+new GoatConstructor(`goatImagesExample/goat-away.jpg`, "goatAway",2);
+new GoatConstructor(`goatImagesExample/goat-out-of-hand.jpg`, "goatHand",3);
+new GoatConstructor(`goatImagesExample/kissing-goat.jpg`, "GoatKiss",4);
+new GoatConstructor(`goatImagesExample/sassy-goat.jpg`, "goatSassy", 5);
+new GoatConstructor(`goatImagesExample/smiling-goat.jpg`, "goatSmile", 6);
+new GoatConstructor(`goatImagesExample/sweater-goat.jpg`, "goatSweater",7);
 
 
 var getFirstImg = document.getElementById('firstPic');
@@ -26,14 +30,35 @@ var getSecondImg = document.getElementById('secondPic');
 var getThirdImg = document.getElementById('thirdPic');
 var imgGetters = [getFirstImg,getSecondImg,getThirdImg];
 
+var rando = goatArr[Math.floor(Math.random() * goatArr.length)];
+
+// now want to grab 3 randos, each unique
+
+
+var displayerFun = function (){
+var displayerArrRandomSelection = [];
+displayerArrRandomSelection.push(rando);
+displayerArrRandomSelection.push(rando);
+displayerArrRandomSelection.push(rando);
+// okay, realizing rando should be a function, its hard coded now, that way it's unique, and the unique checker should be part of that function. 
+
+imgGetters[0].src = displayerArrRandomSelection[0].src;
+imgGetters[1].src = displayerArrRandomSelection[1].src;
+imgGetters[2].src = displayerArrRandomSelection[2].src;
+
+}
+displayerFun();
+
+
+
 // write a function that gets random index from imgArr;
 
 
 // write a function that makes sure the same img isn't displayed at the same time.
 
-getFirstImg.src = imgArr[0];
-getSecondImg.src = imgArr[1];
-getThirdImg.src = imgArr[2];
+// getFirstImg.src = imgArr[0];
+// getSecondImg.src = imgArr[1];
+// getThirdImg.src = imgArr[2];
 
 
 for(let get in imgGetters){
