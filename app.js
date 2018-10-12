@@ -31,24 +31,24 @@ var getThirdImg = document.getElementById('thirdPic');
 var imgGetters = [getFirstImg,getSecondImg,getThirdImg];
 
 
-console.log(goatArr);
-
-// reading online i found that splice mutates the original array,
-// the following code which slices at 0 protects the original. 
-// this is one way to do it, i could just slice, instead of splice, inside randoGoatImgGrabberFun 
 let GoingToBeSplicedGoatArr = goatArr.slice(0);
-
-//Zahra had the good idea workaround of calling two pushes, the first push to do what i'm doing, and the second to push back to the original array (with reading the correct way to push at a particular index is splice(index, 0, item))
-
-// so, two ways!
 
 
 var randoGoatImgGrabberFun = function(){    
-  let ThreeRandosGrabbed = [];
-let singleGrab = GoingToBeSplicedGoatArr[Math.floor(Math.random() * goatArr.length)];
-ThreeRandosGrabbed.push(singleGrab);
+let ThreeRandosGrabbed = [];
+let HowManyDoIWantToDisplay = 3;
 
+// ah oh, this hard coded version isn't going to work, the for loop is trying to splice out the same SingleGrab, I need a unique splice each time. So, turn it into a function, huh?
+let singleGrab = GoingToBeSplicedGoatArr[Math.floor(Math.random() * goatArr.length)];
+
+for(let i = 0; i < HowManyDoIWantToDisplay; i++){
 GoingToBeSplicedGoatArr.splice(singleGrab, 1);
+ThreeRandosGrabbed.push(singleGrab);
+}
+
+console.log(ThreeRandosGrabbed);
+
+
 console.log(GoingToBeSplicedGoatArr);
 console.log(goatArr);
 // displayerArrRandomSelection.push(randoGoatImgGrabberFun);
