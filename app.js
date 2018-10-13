@@ -50,28 +50,14 @@ for (var i = 0; i < HowManyDoIWantToDisplay; i ++){
 randoGoatImgGrabberFun();
 }
 
-// var displayerFun = function (){
-// var displayerArrRandomSelection = [];
-
-// // okay, realizing randoGoatImgGrabberFun should be a function, its hard coded now, that way it's unique, and the unique checker should be part of that function. 
-
-// // imgGetters[0].src = displayerArrRandomSelection[0].src;
-// // imgGetters[1].src = displayerArrRandomSelection[1].src;
-// // imgGetters[2].src = displayerArrRandomSelection[2].src;
-
-// }
-// displayerFun();
+var displayerFun = function (){
+imgGetters[0].src = RandosGrabbed[0].src;
+imgGetters[1].src = RandosGrabbed[1].src;
+imgGetters[2].src = RandosGrabbed[2].src;
+}
+displayerFun();
 
 
-
-// write a function that gets random index from imgArr;
-
-
-// write a function that makes sure the same img isn't displayed at the same time.
-
-// getFirstImg.src = imgArr[0];
-// getSecondImg.src = imgArr[1];
-// getThirdImg.src = imgArr[2];
 
 for (let get in imgGetters){
     imgGetters[get].height = "200";
@@ -85,6 +71,7 @@ let thirdImgLikes = 0;
 //increment all current images appeared
 // test if we have clicked 25 times
 
+//ok, the following is hard coded version, just to get up and running i suppose, but really it shouldn't increment an arbitrary image counter, it should increment this.likes.
 
 var clickHandler = function(event){
 var whatWasClicked = (event.target.id);
