@@ -35,15 +35,28 @@ new GoatConstructor('goatImagesExample/sassy-goat.jpg', 'goatSassy', 5);
 new GoatConstructor('goatImagesExample/smiling-goat.jpg', 'goatSmile', 6);
 new GoatConstructor('goatImagesExample/sweater-goat.jpg', 'goatSweater',7);
 
-let RandosGrabbed = [];
+let randosGrabbed = [];
+let historyOfRandos = [];
 let HowManyDoIWantToDisplay = 3;
 let GoingToBeSplicedGoatObj = goatArr.map(ele => ele);
+let arg;
+let isItFromHandler;
 
-
-var randoGoatImgGrabberFun = function(tester){
+// let argDefaultsToFalse; 
+//therethere
+var randoGoatImgGrabberFun = function(tester, fromHandler){
+//   console.log(fromHandler);
+  if (fromHandler === true){
+    console.log('its from the handler');
+    console.log(GoingToBeSplicedGoatObj);
+  }
+  else if (!isItFromHandler){
+    // console.log('not from handler');
+    // console.log(GoingToBeSplicedGoatObj);
+  }
   let singleGrab = GoingToBeSplicedGoatObj[Math.floor(Math.random() * GoingToBeSplicedGoatObj.length)];
-  RandosGrabbed.push(singleGrab);
-  
+  randosGrabbed.push(singleGrab);
+
   if (tester === 0){
     firstCheckArr.push(singleGrab);
   }
@@ -52,21 +65,20 @@ var randoGoatImgGrabberFun = function(tester){
   }
   let singleGrabIndexVal = GoingToBeSplicedGoatObj.indexOf(singleGrab);
   GoingToBeSplicedGoatObj.splice(singleGrabIndexVal, 1);
+
 };
 
 var shuffleDeck = function(){
   for (var i = 0; i < HowManyDoIWantToDisplay; i ++){
     randoGoatImgGrabberFun();
   }
-  console.log(RandosGrabbed, 'randos grabbed');
 };
 shuffleDeck();
-console.log(RandosGrabbed);
 
 var displayerFun = function (){
-  domImgGetters[0].src = RandosGrabbed[0].src;
-  domImgGetters[1].src = RandosGrabbed[1].src;
-  domImgGetters[2].src = RandosGrabbed[2].src;
+  domImgGetters[0].src = randosGrabbed[0].src;
+  domImgGetters[1].src = randosGrabbed[1].src;
+  domImgGetters[2].src = randosGrabbed[2].src;
 };
 displayerFun();
 
@@ -127,7 +139,6 @@ var forTestingPurposes = function(){
   //   }
   // }
 
-  //herehere
   testingArr1.forEach(item => {
     if (testingArr2.includes(item)) {
       matches.push(item);
@@ -150,21 +161,16 @@ var totalCLicks = 0;
 var clickHandler = function(event){
 
   var whatWasClicked = (event.target);
-  console.log(whatWasClicked, 'whatWasclicked');
 
   if(whatWasClicked.id === 'firstPic'){
-    RandosGrabbed[0].likes++;
-    console.log(RandosGrabbed[0].likes);
-    console.log('does anything show up');
+    randosGrabbed[0].likes++;
   }
   else if(whatWasClicked.id === 'secondPic'){
-    RandosGrabbed[1].likes++;
-    console.log(RandosGrabbed[1].likes);
+    randosGrabbed[1].likes++;
   }
 
   else if (whatWasClicked.id === 'thirdPic'){
-    RandosGrabbed[2].likes++;
-    console.log(RandosGrabbed[2].likes);
+    randosGrabbed[2].likes++;
   }
 
   totalCLicks++;
@@ -172,11 +178,23 @@ var clickHandler = function(event){
 
   //want to ACP and put randosGrabbed, and GoingToBeSplicedGoatObj = goatArr.map(ele => ele);
   // inside randoGoatImgGrabberFun() with some if logic, if randosGrabbed is full, then do a refresh, else if empty proceed as usual.
-  
-  RandosGrabbed = [];
-  //reassigns to initial value
+  //on second thought, lets keep it how it is for now...
+  historyOfRandos.push(randosGrabbed);
+  randosGrabbed = [];
 
-  shuffleDeck();
+
+  //reassigns to initial value
+  //commenting out shuffledeck for now
+  //shuffleDeck();
+  //herehere
+
+
+
+
+  
+  randoGoatImgGrabberFun(null,true);
+  randoGoatImgGrabberFun(null,true);
+  randoGoatImgGrabberFun(null,true);
   displayerFun();
   GoingToBeSplicedGoatObj = goatArr.map(ele => ele);
 };
@@ -236,7 +254,7 @@ var myChart = new Chart(ctx, {
     scales: {
       yAxes: [{
         ticks: {
-          beginAtZero:true
+          beginAtZero:arg
         }
       }]
     }
