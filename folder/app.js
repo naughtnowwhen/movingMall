@@ -135,6 +135,10 @@ var clickHandler = function(event){
 
   totalCLicks++;
   //resets Randos to an empty slate.
+
+  //want to ACP and put randosGrabbed, and GoingToBeSplicedGoatObj = goatArr.map(ele => ele);
+  // inside randoGoatImgGrabberFun() with some if logic, if randosGrabbed is full, then do a refresh, else if empty proceed as usual.
+  
   RandosGrabbed = [];
   //reassigns to initial value
 
