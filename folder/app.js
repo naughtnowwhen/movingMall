@@ -1,11 +1,20 @@
 'use strict';
 
-var getImgDiv = document.getElementById('imgDiv');
-
-
-// instead make this into a constructor that gets the name and src.
-
 var goatArr = [];
+
+//for testing
+let firstCheckArr = [];
+let secondCheckArr = [];
+var tester;
+var matches = [];
+// end of testing
+
+//DOMMY
+var getImgDiv = document.getElementById('imgDiv');
+var getFirstImg = document.getElementById('firstPic');
+var getSecondImg = document.getElementById('secondPic');
+var getThirdImg = document.getElementById('thirdPic');
+var domImgGetters = [getFirstImg,getSecondImg,getThirdImg];
 
 
 var GoatConstructor = function(src, name, int, likes,timesShown){
@@ -26,44 +35,21 @@ new GoatConstructor('goatImagesExample/sassy-goat.jpg', 'goatSassy', 5);
 new GoatConstructor('goatImagesExample/smiling-goat.jpg', 'goatSmile', 6);
 new GoatConstructor('goatImagesExample/sweater-goat.jpg', 'goatSweater',7);
 
-
-
-var getFirstImg = document.getElementById('firstPic');
-var getSecondImg = document.getElementById('secondPic');
-var getThirdImg = document.getElementById('thirdPic');
-
-
-//object version
-// var imgGettersObj = {
-//   first :  {img : getFirstImg, ref : },
-//   second:{img : getSecondImg},
-//   third :{img : getThirdImg}
-
-// };
-
-var DOMimgGetters = [getFirstImg,getSecondImg,getThirdImg];
-
-let GoingToBeSplicedGoatObj = goatArr.map(ele => ele);
 let RandosGrabbed = [];
 let HowManyDoIWantToDisplay = 3;
+let GoingToBeSplicedGoatObj = goatArr.map(ele => ele);
 
-let firstCheckArr = [];
-let secondCheckArr = [];
-
-var tester;
 
 var randoGoatImgGrabberFun = function(tester){
   let singleGrab = GoingToBeSplicedGoatObj[Math.floor(Math.random() * GoingToBeSplicedGoatObj.length)];
   RandosGrabbed.push(singleGrab);
-
+  
   if (tester === 0){
     firstCheckArr.push(singleGrab);
   }
-
   if(tester === 1){
     secondCheckArr.push(singleGrab);
   }
-
   let singleGrabIndexVal = GoingToBeSplicedGoatObj.indexOf(singleGrab);
   GoingToBeSplicedGoatObj.splice(singleGrabIndexVal, 1);
 };
@@ -75,33 +61,81 @@ var shuffleDeck = function(){
   console.log(RandosGrabbed, 'randos grabbed');
 };
 shuffleDeck();
+console.log(RandosGrabbed);
 
 var displayerFun = function (){
-  DOMimgGetters[0].src = RandosGrabbed[0].src;
-  DOMimgGetters[1].src = RandosGrabbed[1].src;
-  DOMimgGetters[2].src = RandosGrabbed[2].src;
+  domImgGetters[0].src = RandosGrabbed[0].src;
+  domImgGetters[1].src = RandosGrabbed[1].src;
+  domImgGetters[2].src = RandosGrabbed[2].src;
 };
-
 displayerFun();
 
-for (let get in DOMimgGetters){
-  DOMimgGetters[get].height = '200';
-  DOMimgGetters[get].width = '200';
+for (let get in domImgGetters){
+  domImgGetters[get].height = '200';
+  domImgGetters[get].width = '200';
 }
 
 
-
-var everyOther = function(){
+var testForDuplicates = function(){
   for (let i = 0; i < 2; i ++){
     var tester = (i % 2);
-    console.log(tester);
     randoGoatImgGrabberFun(tester);
     randoGoatImgGrabberFun(tester);
     randoGoatImgGrabberFun(tester);
   }
-//   GoingToBeSplicedGoatObj = goatArr.map(ele => ele);
+  // example code
+  //   testingArr1.forEach(item => {
+  //     if (testingArr2.includes(item)) {
+  //       matches.push(item);
+  //       console.log('found one');
+  //     }
+  //   });
+  firstCheckArr.forEach(item => {if (secondCheckArr.includes(item)){
+    matches.push(item);
+    console.log('found a match');
+  }});
 };
 
+//test passes so commenting out the call
+// testForDuplicates();
+
+/////////////////////////////////////////////////////////////////////////////////////
+//testing
+var forTestingPurposes = function(){
+
+  let sourceArr = [];
+  let testingArr1 = [];
+  let testingArr2 = [];
+  let matches = [];
+
+  for (let i = 0; i < 100; i ++){
+    sourceArr.push(i);
+  }
+  for (let j = 0; j < 10; j ++){
+    testingArr1.push(Math.floor(Math.random() * sourceArr.length));
+    testingArr2.push(Math.floor(Math.random() * sourceArr.length));
+  }
+  console.log(testingArr1);
+  console.log(testingArr2);
+
+  // for(let i = 0; i < testingArr1.length; i ++){
+  //   for(let j = 0; j < testingArr2.length; j ++){
+  //     if(testingArr1[i] === testingArr2[j]){
+  //       matches.push(testingArr1[i]);
+  //       console.log('found a match');
+  //     }
+  //   }
+  // }
+
+  //herehere
+  testingArr1.forEach(item => {
+    if (testingArr2.includes(item)) {
+      matches.push(item);
+      console.log('found one');
+    }
+  });
+
+};
 
 
 //increment all current images appeared
@@ -145,9 +179,6 @@ var clickHandler = function(event){
   shuffleDeck();
   displayerFun();
   GoingToBeSplicedGoatObj = goatArr.map(ele => ele);
-  //   console.log(GoingToBeSplicedGoatObj);
-
-  //increment the total clicks here in the handler...
 };
 
 getImgDiv.addEventListener('click', clickHandler);
